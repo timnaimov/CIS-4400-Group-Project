@@ -1,0 +1,20 @@
+import pandas as pd
+import numpy as np
+import requests
+import json
+
+# The URL from which to download the CSV
+RESTAURANT_URL = "https://data.cityofnewyork.us/api/views/43nn-pn8j/rows.csv?fourfour=43nn-pn8j&cacheBust=1711046033&date=20240322&accessType=DOWNLOAD"
+
+# Send a GET request to the URL
+response = requests.get(RESTAURANT_URL)
+# Check if the request was successful
+if response.status_code == 200:
+    # Open a file in binary write mode
+    with open('restaurant_data.csv', 'wb') as file:
+        # Write the content of the response to the file
+        file.write(response.content)
+    print("CSV file has been downloaded and saved as 'restaurant_data.csv'.")
+else:
+    print(f"Failed to download the file. Status code: {response.status_code}")
+
