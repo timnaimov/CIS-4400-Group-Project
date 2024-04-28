@@ -13,4 +13,6 @@ sources:
         description: "Details of violations found during inspections."
       - name: date_table
       - name: location_table
-      - name: restaurant_table  
+      - name: restaurant_table
+      - name: facts_source_table
+        description: "Source table for the facts data."
