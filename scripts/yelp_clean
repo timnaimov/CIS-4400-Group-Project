@@ -1,0 +1,88 @@
+from google.cloud import storage
+import pandas as pd
+import numpy as np
+import requests
+import json
+from io import StringIO
+
+#Specify the path to your JSON configuration file
+config_file_path = '/content/nyc-restaurants-419717-6cf4f9e6c135.json'
+
+# Authenticate using a service account key
+storage_client = storage.Client.from_service_account_json('/content/nyc-restaurants-419717-6cf4f9e6c135.json')
+
+# Specify the name of your bucket and folder
+bucket_name = 'restaurant-dataset'
+folder_name = 'yelp'
+
+# Access the specified bucket
+bucket = storage_client.bucket(bucket_name)
+
+
+# List all blobs (files) in the specified folder
+blobs = bucket.list_blobs(prefix=folder_name)
+
+#Initialize an empty list to store DataFrames
+dfs=[]
+
+# Loop through each blob (file) in the folder
+for blob in blobs:
+    # Check if the blob is a CSV file
+    if blob.name.endswith('.csv'):
+        # Download the CSV file to a temporary file
+        blob.download_to_filename('/tmp/temp.csv')
+        # Read the CSV file into a DataFrame
+        df = pd.read_csv('/tmp/temp.csv')
+        # Append the DataFrame to the list
+        dfs.append(df)
+
+# Concatenate all DataFrames into one DataFrame
+df_yelp = pd.concat(dfs, ignore_index=True)
+
+# Display the shape of the combined DataFrame
+
+#print(df_yelp.shape)
+
+df_yelp
+
+
+#Number of duplicates to examine how many calls were made for the same restaurant 
+num_duplicates = df_yelp.duplicated(subset=['id']).sum()
+
+print("Number of duplicates based on id:", num_duplicates)
+
+
+#Drop duplicates 
+df_yelp_clean= df_yelp.drop_duplicates(subset=['id'], keep='first')
+df_yelp_clean
+
+# Specify the name of your bucket
+bucket_name = 'restaurant-dataset'
+
+#Specify the path to your JSON configuration file
+config_file_path = '/content/nyc-restaurants-419717-6cf4f9e6c135.json'
+
+# Authenticate using a service account key
+storage_client = storage.Client.from_service_account_json('/content/nyc-restaurants-419717-6cf4f9e6c135.json')
+
+# Access the specified bucket
+bucket = storage_client.bucket(bucket_name)
+
+# Specify the folder name within the bucket
+folder_name = 'df_raw'
+
+#specify name of the CSV file in the bucket
+blob = bucket.blob (f'{folder_name}/yelp_data_clean.csv')
+
+# Convert DataFrame to CSV
+output = StringIO()
+df_yelp_clean.to_csv(output, index = False)
+data = output.getvalue()
+output.close()
+
+try:
+    # Upload CSV file to the bucket
+    blob.upload_from_string(data, content_type='csv')
+    print("File uploaded successfully!")
+except Exception as e:
+    print(f"Error uploading file: {e}")
