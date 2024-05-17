@@ -36,7 +36,7 @@ Data Orchestration: dbt Cloud to automate our data pipeline
 
 Data warehouse: BigQuery for our data warehouse
 
-Data Visualization:
+Data Visualization: Tableau for our visualizations
 
 https://public.tableau.com/views/Restaurantsviz/W?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link
 
