@@ -42,6 +42,8 @@ https://public.tableau.com/views/Restaurantsviz/W?:language=en-US&publish=yes&:s
 
 Visualization 1 - Scatter Plot: https://public.tableau.com/views/Visualization-ScatterPlot/Sheet1?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link
 
+Visualization 2 - NYC Zipcode Map: https://public.tableau.com/views/Visualization-NYCZipcodeMap/Dashboard2?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link
+
 7. Key Features
 
 Health Inspection Scores: Access up-to-date health inspection scores and reports for restaurants across NYC, ensuring transparency and accountability.
