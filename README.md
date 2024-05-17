@@ -21,6 +21,10 @@ Dine Safe is designed for everyone, particularly food lovers, health enthusiasts
 We gathered data from NYC Open Source Data on the restaurants in NYC and all the health inspections they went through. 
 In NYC it is a requirement for each restaurant to have 1 unexpected inspection per year. We also used Yelp reviews to analyze and gain insights into the NYC restaurant world. 
 
+NYC Open Source Data: https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j/about_data
+
+Yelp Reviews: https://www.yelp.com/dataset/download
+
 5. Methods
 
 At the core of our operation lies a sophisticated tech stack designed to extract actionable insights from raw data. 
