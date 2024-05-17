@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="ModelingRestaurants" id="GoogleBigQuery-259" database="GoogleBigQuery" >
+	<schema name="INSTANCE" catalogname="ModelingRestaurants" >
+		<table name="Dim_Action" >
+			<column name="ACTION_ID" type="int64" jt="4" mandatory="y" />
+			<column name="Action_Key" type="string" jt="12" mandatory="y" />
+			<index name="pk_Dim_Action" unique="PRIMARY_KEY" >
+				<column name="Action_Key" />
+			</index>
+		</table>
+		<table name="Dim_Date" >
+			<column name="DAY_MONTH" type="date" jt="91" mandatory="y" />
+			<column name="DAY_WEEK" type="date" jt="91" mandatory="y" />
+			<column name="Date_Key" type="date" jt="91" mandatory="y" />
+			<index name="pk_Dim_Date" unique="PRIMARY_KEY" >
+				<column name="Date_Key" />
+			</index>
+		</table>
+		<table name="Dim_Location" >
+			<column name="BORO" type="string" jt="12" mandatory="y" />
+			<column name="BUILDING" type="string" jt="12" mandatory="y" />
+			<column name="STREET" type="string" jt="12" mandatory="y" />
+			<column name="ZIPCODE" type="string" jt="12" mandatory="y" />
+			<column name="LOCATION_ID" type="string" jt="12" mandatory="y" />
+			<column name="Location_Key" type="string" jt="12" mandatory="y" />
+			<index name="pk_Dim_Location" unique="PRIMARY_KEY" >
+				<column name="Location_Key" />
+			</index>
+		</table>
+		<table name="Dim_Restaurant" >
+			<column name="DBA" type="int64" jt="4" />
+			<column name="PHONE" type="string" jt="12" />
+			<column name="CAMIS" type="int64" jt="4" />
+			<column name="CUISINE_DESCRIPTION" type="string" jt="12" />
+			<column name="Restaurant_Key" type="int64" jt="4" mandatory="y" />
+			<index name="pk_dim_restaurant" unique="PRIMARY_KEY" >
+				<column name="Restaurant_Key" />
+			</index>
+		</table>
+		<table name="Dim_Violation" >
+			<column name="VIOLATION_ID" type="int64" jt="4" mandatory="y" />
+			<column name="VIOLATION_CODE" type="string" jt="12" mandatory="y" />
+			<column name="VIOLATION_DESCRIPTION" type="string" jt="12" mandatory="y" />
+			<column name="INSPECTION_DATE" type="date" jt="91" mandatory="y" />
+			<column name="CRITICAL_FLAG" type="string" jt="12" mandatory="y" />
+			<column name="Violation_Key" type="string" jt="12" mandatory="y" />
+			<index name="pk_Dim_Violation" unique="PRIMARY_KEY" >
+				<column name="Violation_Key" />
+			</index>
+		</table>
+		<table name="Entity" />
+		<table name="Facts_Inspection_Type" >
+			<column name="INSPECTION_TYPE_ID" type="string" jt="12" mandatory="y" />
+			<column name="Inspection_Key" type="string" jt="12" mandatory="y" />
+			<index name="pk_Facts_Inspection_Type" unique="PRIMARY_KEY" >
+				<column name="Inspection_Key" />
+			</index>
+		</table>
+		<table name="Facts_Table" >
+			<column name="SCORE" type="int64" jt="4" mandatory="y" />
+			<column name="GRADE" type="string" jt="12" mandatory="y" />
+			<column name="SCORE_ID" type="string" jt="12" mandatory="y" />
+			<column name="GRADE_ID" type="string" jt="12" mandatory="y" />
+			<column name="Restaurant_Key" type="string" jt="12" mandatory="y" />
+			<column name="Location_Key" type="string" jt="12" mandatory="y" />
+			<column name="Inspection_Date_Key" type="date" jt="91" mandatory="y" />
+			<column name="Violation_Key" type="string" jt="12" mandatory="y" />
+			<column name="Inspection_Key" type="string" jt="12" mandatory="y" />
+			<column name="Action_Key" type="string" jt="12" mandatory="y" />
+			<column name="Facts_Key" type="string" jt="12" mandatory="y" />
+			<column name="Record_Date" type="date" jt="91" mandatory="y" />
+			<column name="Grade_Date" type="date" jt="91" mandatory="y" />
+			<index name="pk_Facts_Table" unique="PRIMARY_KEY" >
+				<column name="Facts_Key" />
+				<column name="Record_Date" />
+				<column name="Grade_Date" />
+			</index>
+			<fk name="fk_Facts_Table_Dim_Restaurant" to_schema="ModelingRestaurants.INSTANCE" to_table="Dim_Restaurant" >
+				<fk_column name="Restaurant_Key" pk="Restaurant_Key" />
+			</fk>
+			<fk name="fk_Facts_Table_Dim_Location" to_schema="ModelingRestaurants.INSTANCE" to_table="Dim_Location" >
+				<fk_column name="Location_Key" pk="Location_Key" />
+			</fk>
+			<fk name="fk_Facts_Table_Dim_Date" to_schema="ModelingRestaurants.INSTANCE" to_table="Dim_Date" >
+				<fk_column name="Inspection_Date_Key" pk="Date_Key" />
+			</fk>
+			<fk name="fk_Facts_Table_Dim_Violation" to_schema="ModelingRestaurants.INSTANCE" to_table="Dim_Violation" >
+				<fk_column name="Violation_Key" pk="Violation_Key" />
+			</fk>
+			<fk name="fk_Facts_Table_Facts_Inspection_Type" to_schema="ModelingRestaurants.INSTANCE" to_table="Facts_Inspection_Type" >
+				<fk_column name="Inspection_Key" pk="Inspection_Key" />
+			</fk>
+			<fk name="fk_Facts_Table_Dim_Action" to_schema="ModelingRestaurants.INSTANCE" to_table="Dim_Action" >
+				<fk_column name="Action_Key" pk="Action_Key" />
+			</fk>
+			<fk name="fk_Facts_Table_Dim_Date_0" to_schema="ModelingRestaurants.INSTANCE" to_table="Dim_Date" >
+				<fk_column name="Record_Date" pk="Date_Key" />
+			</fk>
+			<fk name="fk_Facts_Table_Dim_Date_1" to_schema="ModelingRestaurants.INSTANCE" to_table="Dim_Date" >
+				<fk_column name="Grade_Date" pk="Date_Key" />
+			</fk>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout-416" confirmed="y" show_relation="columns" >
+		<entity schema="ModelingRestaurants.INSTANCE" name="Dim_Action" color="C1D8EE" x="799" y="527" />
+		<entity schema="ModelingRestaurants.INSTANCE" name="Dim_Date" color="C1D8EE" x="731" y="51" />
+		<entity schema="ModelingRestaurants.INSTANCE" name="Dim_Location" color="C1D8EE" x="442" y="68" />
+		<entity schema="ModelingRestaurants.INSTANCE" name="Dim_Restaurant" color="C1D8EE" x="102" y="85" />
+		<entity schema="ModelingRestaurants.INSTANCE" name="Dim_Violation" color="C1D8EE" x="51" y="408" />
+		<entity schema="ModelingRestaurants.INSTANCE" name="Facts_Inspection_Type" color="C1D8EE" x="901" y="357" />
+		<entity schema="ModelingRestaurants.INSTANCE" name="Facts_Table" color="C1D8EE" x="425" y="323" />
+		<script name="SQL_Editor" id="Editor-97b" language="SQL" >
+			<string><![CDATA[CREATE SCHEMA INSTANCE;
+
+CREATE TABLE ModelingRestaurants.INSTANCE.Dim_Action ( 
+	ACTION_ID int64 NOT NULL  ,
+	Action_Key string NOT NULL  
+ );
+
+ALTER TABLE ModelingRestaurants.INSTANCE.Dim_Action ADD PRIMARY KEY ( Action_Key )  NOT ENFORCED;
+
+CREATE TABLE ModelingRestaurants.INSTANCE.Dim_Date ( 
+	DAY_MONTH date NOT NULL  ,
+	DAY_WEEK date NOT NULL  ,
+	Date_Key date NOT NULL  
+ );
+
+ALTER TABLE ModelingRestaurants.INSTANCE.Dim_Date ADD PRIMARY KEY ( Date_Key )  NOT ENFORCED;
+
+CREATE TABLE ModelingRestaurants.INSTANCE.Dim_Location ( 
+	BORO string NOT NULL  ,
+	BUILDING string NOT NULL  ,
+	STREET string NOT NULL  ,
+	ZIPCODE string NOT NULL  ,
+	LOCATION_ID string NOT NULL  ,
+	Location_Key string NOT NULL  
+ );
+
+ALTER TABLE ModelingRestaurants.INSTANCE.Dim_Location ADD PRIMARY KEY ( Location_Key )  NOT ENFORCED;
+
+CREATE TABLE ModelingRestaurants.INSTANCE.Dim_Restaurant ( 
+	DBA int64  ,
+	PHONE string  ,
+	CAMIS int64  ,
+	CUISINE_DESCRIPTION string  ,
+	Restaurant_Key int64 NOT NULL  
+ );
+
+ALTER TABLE ModelingRestaurants.INSTANCE.Dim_Restaurant ADD PRIMARY KEY ( Restaurant_Key )  NOT ENFORCED;
+
+CREATE TABLE ModelingRestaurants.INSTANCE.Dim_Violation ( 
+	VIOLATION_ID int64 NOT NULL  ,
+	VIOLATION_CODE string NOT NULL  ,
+	VIOLATION_DESCRIPTION string NOT NULL  ,
+	INSPECTION_DATE date NOT NULL  ,
+	CRITICAL_FLAG string NOT NULL  ,
+	Violation_Key string NOT NULL  
+ );
+
+ALTER TABLE ModelingRestaurants.INSTANCE.Dim_Violation ADD PRIMARY KEY ( Violation_Key )  NOT ENFORCED;
+
+CREATE TABLE ModelingRestaurants.INSTANCE.Entity ( 
+ );
+
+CREATE TABLE ModelingRestaurants.INSTANCE.Facts_Inspection_Type ( 
+	INSPECTION_TYPE_ID string NOT NULL  ,
+	Inspection_Key string NOT NULL  
+ );
+
+ALTER TABLE ModelingRestaurants.INSTANCE.Facts_Inspection_Type ADD PRIMARY KEY ( Inspection_Key )  NOT ENFORCED;
+
+CREATE TABLE ModelingRestaurants.INSTANCE.Facts_Table ( 
+	SCORE int64 NOT NULL  ,
+	GRADE string NOT NULL  ,
+	SCORE_ID string NOT NULL  ,
+	GRADE_ID string NOT NULL  ,
+	Restaurant_Key string NOT NULL  ,
+	Location_Key string NOT NULL  ,
+	Inspection_Date_Key date NOT NULL  ,
+	Violation_Key string NOT NULL  ,
+	Inspection_Key string NOT NULL  ,
+	Action_Key string NOT NULL  ,
+	Facts_Key string NOT NULL  ,
+	Record_Date date NOT NULL  ,
+	Grade_Date date NOT NULL  
+ );
+
+ALTER TABLE ModelingRestaurants.INSTANCE.Facts_Table ADD PRIMARY KEY ( Facts_Key, Record_Date, Grade_Date )  NOT ENFORCED;
+
+ALTER TABLE ModelingRestaurants.INSTANCE.Facts_Table ADD CONSTRAINT fk_Facts_Table_Dim_Restaurant FOREIGN KEY ( Restaurant_Key ) REFERENCES ModelingRestaurants.INSTANCE.Dim_Restaurant( Restaurant_Key ) NOT ENFORCED;
+
+ALTER TABLE ModelingRestaurants.INSTANCE.Facts_Table ADD CONSTRAINT fk_Facts_Table_Dim_Location FOREIGN KEY ( Location_Key ) REFERENCES ModelingRestaurants.INSTANCE.Dim_Location( Location_Key ) NOT ENFORCED;
+
+ALTER TABLE ModelingRestaurants.INSTANCE.Facts_Table ADD CONSTRAINT fk_Facts_Table_Dim_Date FOREIGN KEY ( Inspection_Date_Key ) REFERENCES ModelingRestaurants.INSTANCE.Dim_Date( Date_Key ) NOT ENFORCED;
+
+ALTER TABLE ModelingRestaurants.INSTANCE.Facts_Table ADD CONSTRAINT fk_Facts_Table_Dim_Violation FOREIGN KEY ( Violation_Key ) REFERENCES ModelingRestaurants.INSTANCE.Dim_Violation( Violation_Key ) NOT ENFORCED;
+
+ALTER TABLE ModelingRestaurants.INSTANCE.Facts_Table ADD CONSTRAINT fk_Facts_Table_Facts_Inspection_Type FOREIGN KEY ( Inspection_Key ) REFERENCES ModelingRestaurants.INSTANCE.Facts_Inspection_Type( Inspection_Key ) NOT ENFORCED;
+
+ALTER TABLE ModelingRestaurants.INSTANCE.Facts_Table ADD CONSTRAINT fk_Facts_Table_Dim_Action FOREIGN KEY ( Action_Key ) REFERENCES ModelingRestaurants.INSTANCE.Dim_Action( Action_Key ) NOT ENFORCED;
+
+ALTER TABLE ModelingRestaurants.INSTANCE.Facts_Table ADD CONSTRAINT fk_Facts_Table_Dim_Date_0 FOREIGN KEY ( Record_Date ) REFERENCES ModelingRestaurants.INSTANCE.Dim_Date( Date_Key ) NOT ENFORCED;
+
+ALTER TABLE ModelingRestaurants.INSTANCE.Facts_Table ADD CONSTRAINT fk_Facts_Table_Dim_Date_1 FOREIGN KEY ( Grade_Date ) REFERENCES ModelingRestaurants.INSTANCE.Dim_Date( Date_Key ) NOT ENFORCED;
+]]></string>
+		</script>
+	</layout>
+</project>
