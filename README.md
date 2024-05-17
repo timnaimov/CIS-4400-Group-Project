@@ -28,11 +28,14 @@ Utilizing tools like DbSchema, we process and ingest data with precision and eff
 
 6. Data Tools
 
-Data Storage: Google Cloud Storage 
+Data Storage: Google Cloud Storage, MongoDB (used for Yelp as a reference database when extracting restaurant ratings)
  
 Data Processing: Python Script to process/ingest the data
  
-Data Orchestration: dbt Cloud to automate your data pipeline
+Data Orchestration: dbt Cloud to automate our data pipeline
+
+Data warehouse: BigQuery for our data warehouse
+
 
 7. Key Features
 
@@ -46,3 +49,11 @@ User Ratings & Reviews: Contribute to the community by sharing your dining exper
 
 Search & Filter: Easily search for restaurants by name, cuisine, or location and filter results based on health ratings or specific hygiene criteria.
 Favorites & Alerts: Save your favorite restaurants for quick access and receive alerts about any changes in their health inspection status.
+
+<img width="300" alt="Screenshot 2024-05-16 at 9 35 34 PM" src="https://github.com/timnaimov/CIS-4400-Group-Project/assets/81783259/d14d1e77-1b14-45d3-ac91-fb3569b9c7e1">
+
+<img width="400" alt="Screenshot 2024-05-16 at 9 35 59 PM" src="https://github.com/timnaimov/CIS-4400-Group-Project/assets/81783259/4009e8f4-5aa8-476f-bbb6-f21f5d7c64f9">
+
+
+
+
